@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'category.apps.CategoryConfig',
+    'product.apps.ProductConfig',
+    'feedback.apps.FeedbackConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -74,10 +78,15 @@ WSGI_APPLICATION = 'perfume_store.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'perfume_db',      # Database name you just created
+        'USER': 'admin',           # User you just created
+        'PASSWORD': '1230',        # Password you set
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
+
 
 
 # Password validation
