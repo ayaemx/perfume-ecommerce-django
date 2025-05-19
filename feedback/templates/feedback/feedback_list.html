@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>User Feedback</h2>
+    <a href="{% url 'feedback:add' %}" class="btn btn-primary mb-3">Add Feedback</a>
+    <ul class="list-group">
+        {% for fb in feedbacks %}
+            <li class="list-group-item">
+                <strong>{{ fb.name }}</strong> on <em>{{ fb.product.name }}</em> <small class="text-muted">{{ fb.created_at|date:"Y-m-d H:i" }}</small>
+                <p>{{ fb.comment }}</p>
+                {% if fb.image %}
+                    <img src="{{ fb.image.url }}" alt="Feedback image" class="img-thumbnail" style="max-width:120px;">
+                {% endif %}
+            </li>
+        {% empty %}
+            <li class="list-group-item">No feedback yet.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
