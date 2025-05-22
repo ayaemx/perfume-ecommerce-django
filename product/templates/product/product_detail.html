@@ -3,7 +3,7 @@
 <div class="container mt-4">
     <div class="card mb-4 shadow">
         {% if product.image %}
-        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" style="max-height:300px;object-fit:cover;">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid rounded" style="max-width: 350px; max-height: 350px; object-fit: cover;">
         {% endif %}
         <div class="card-body">
             <h3 class="card-title">{{ product.name }}</h3>
@@ -13,10 +13,32 @@
             <p class="card-text"><strong>Stock:</strong> {{ product.stock }}</p>
             <p class="card-text"><strong>SKU:</strong> {{ product.sku }}</p>
             <p class="card-text"><small class="text-muted">Added: {{ product.date_added|date:"Y-m-d H:i" }}</small></p>
-            <a href="{% url 'product:edit' product.pk %}" class="btn btn-outline-secondary btn-sm me-2">Edit</a>
-            <a href="{% url 'product:delete' product.pk %}" class="btn btn-outline-danger btn-sm">Delete</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'product:edit' product.pk %}" class="btn btn-outline-secondary btn-sm me-2">Edit</a>
+                <a href="{% url 'product:delete' product.pk %}" class="btn btn-outline-danger btn-sm">Delete</a>
+            {% endif %}
             <a href="{% url 'product:list' %}" class="btn btn-link">Back to Products</a>
         </div>
+    </div>
+
+    <!-- Feedback Section (as before) -->
+    <div class="mt-5">
+        <h4 class="mb-3">User Feedback</h4>
+        <ul class="list-group mb-4">
+            {% for fb in product.feedbacks.all %}
+                <li class="list-group-item">
+                    <strong>{{ fb.name }}</strong>
+                    <span class="text-muted small">{{ fb.created_at|date:"Y-m-d H:i" }}</span>
+                    <p>{{ fb.comment }}</p>
+                    {% if fb.image %}
+                        <img src="{{ fb.image.url }}" alt="Feedback image" class="img-thumbnail" style="max-width:120px;">
+                    {% endif %}
+                </li>
+            {% empty %}
+                <li class="list-group-item">No feedback for this product yet.</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'feedback:add' %}?product={{ product.pk }}" class="btn btn-primary btn-sm">Add Feedback</a>
     </div>
 </div>
 {% endblock %}

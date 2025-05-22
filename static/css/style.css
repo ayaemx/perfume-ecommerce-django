@@ -1,0 +1,25 @@
+body {
+    background-color: #f9f6f7;
+    color: #222;
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, 'sans-serif';
+}
+
+.navbar {
+    background: linear-gradient(90deg, #f7cac9 0%, #fff 100%);
+}
+
+.btn-primary, .btn-success {
+    background-color: #b48a78;
+    border: none;
+}
+
+.btn-primary:hover, .btn-success:hover {
+    background-color: #a07860;
+}
+
+.list-group-item {
+    border-radius: 8px;
+    margin-bottom: 8px;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
